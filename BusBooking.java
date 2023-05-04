@@ -73,8 +73,8 @@ public class BusBooking extends Buses{
                 user1.getDate();
                 user1.showBuses();
                 System.out.println("Enter Choice");
-                int choice=scn.nextInt();
-                //user1.selectedBus=user1.buses[choice-1];
+                String choice=scn.next();
+                user1.selectedBus=choice;
                 user1.showTicket();
                 System.out.println("1)Book another ticket");
                 System.out.println("2)Exit");
