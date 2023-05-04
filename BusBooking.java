@@ -1,12 +1,15 @@
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 interface BusInterface{
     public void showBuses();
     public void showTicket();
     public void getSourceDest();
     public void getDate();
-    String[] buses={"KSRTC","TSRTC","Thoma Luxury Travels"};
-    int[] prices={100,140,4000};
+    // String[] buses={"KSRTC","TSRTC","Thoma Luxury Travels"};
+    // int[] prices={100,140,4000};
+    Map <String,Integer> buses=new HashMap<>();
     
 }
 class Buses implements BusInterface{
@@ -16,13 +19,13 @@ class Buses implements BusInterface{
     String dest;
     Date date;
     String selectedBus;
+
     public void showBuses(){
         System.out.println("Buses Available:");
-        for(int i=0;i<buses.length;i++){
-            System.out.println((i+1)+")"+buses[i]+":Rs "+prices[i]);
+        System.out.println(buses);
         }
 
-    }   
+    
     public void showTicket(){
         System.out.println("----------------------------");
         System.out.println("Name : "+this.name);
@@ -56,6 +59,9 @@ public class BusBooking extends Buses{
         Scanner scn=new Scanner(System.in);
         int ch=2;
         Buses user1=new Buses();
+        buses.put("KSRTC", 100);
+        buses.put("TSRTC",200);
+        buses.put("Thoma Luxury Travels",4000);
 
 
         do{     
@@ -68,7 +74,7 @@ public class BusBooking extends Buses{
                 user1.showBuses();
                 System.out.println("Enter Choice");
                 int choice=scn.nextInt();
-                user1.selectedBus=user1.buses[choice-1];
+                //user1.selectedBus=user1.buses[choice-1];
                 user1.showTicket();
                 System.out.println("1)Book another ticket");
                 System.out.println("2)Exit");
