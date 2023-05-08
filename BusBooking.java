@@ -1,7 +1,11 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Stream;
+//import StreamApi.StreamApi;
 interface BusInterface{
     public void showBuses();
     public void showTicket();
@@ -9,8 +13,10 @@ interface BusInterface{
     public void getDate();
     // String[] buses={"KSRTC","TSRTC","Thoma Luxury Travels"};
     // int[] prices={100,140,4000};
-    Map <String,Integer> buses=new HashMap<>();
-    
+    List<String> busName=new ArrayList<>();
+    List<Integer> busPrice=new ArrayList<>();
+    //Map <String,Integer> buses=new HashMap<>();
+    Stream<Integer> str=busPrice.stream();
 }
 class Buses implements BusInterface{
     Scanner scn=new Scanner(System.in);
@@ -22,8 +28,10 @@ class Buses implements BusInterface{
 
     public void showBuses(){
         System.out.println("Buses Available:");
-        System.out.println(buses);
+        for(int i=0;i<busName.size();i++){
+        System.out.println(busName.get(i)+": Rs "+busPrice.get(i));
         }
+    }
 
     
     public void showTicket(){
@@ -59,10 +67,13 @@ public class BusBooking extends Buses{
         Scanner scn=new Scanner(System.in);
         int ch=2;
         Buses user1=new Buses();
-        buses.put("KSRTC", 100);
-        buses.put("TSRTC",200);
-        buses.put("Thoma Luxury Travels",4000);
-
+        busName.add("KSRTC");
+        busName.add("Tsrtc");
+        busName.add("Thoma Travels");
+        busPrice.add(100);
+        busPrice.add(200);
+        busPrice.add(4000);
+        int avg=(str.reduce(0, (p,q)->(p+q))/busPrice.size());
 
         do{     
 
@@ -73,8 +84,8 @@ public class BusBooking extends Buses{
                 user1.getDate();
                 user1.showBuses();
                 System.out.println("Enter Choice");
-                String choice=scn.next();
-                user1.selectedBus=choice;
+                int choice=scn.nextInt();
+                user1.selectedBus=busName.get((choice-1));
                 user1.showTicket();
                 System.out.println("1)Book another ticket");
                 System.out.println("2)Exit");
